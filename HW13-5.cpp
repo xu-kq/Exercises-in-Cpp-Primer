@@ -5,14 +5,15 @@ class HasPtr{
 public:
     HasPtr(const std::string &s = std::string()) : 
         ps(new std::string(s)), i(0){}
-    // copy constructor
+        
+    //todo: copy constructor
     HasPtr(const HasPtr& rhs) : 
         ps(new std::string(*rhs.ps)) { }
 
     std::string get_string(){
         return *(this->ps);
     }
-    auto get_addr(){
+    int* get_addr(){
 
         return reinterpret_cast<int*>(this->ps);
     }
