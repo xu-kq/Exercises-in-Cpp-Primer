@@ -36,6 +36,6 @@ int main(){
     D1 d1;
     D2 d2;
     Base* p = &d2;
-    p->fcn(1);
+    p->fcn();
     return 0;
 }
