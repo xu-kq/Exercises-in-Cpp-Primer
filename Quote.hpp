@@ -1,9 +1,15 @@
+#pragma once
 #include<iostream>
 #include<string>
 
 class Quote{
 public:
-    Quote() = default;
+    Quote() = default;              // 默认初始化
+    Quote(const Quote&) = default;  // 对成员依次拷贝
+    Quote(Quote&&) = default; // 对成员依次赋值
+    Quote& operator=(const Quote&) = default;
+    Quote& operator=(Quote&&) = default;
+    
     Quote(const std::string &book, double sales_price) :
         bookNo(book), price(sales_price) { }
     std::string isbn() const{
@@ -15,6 +21,15 @@ public:
     }
     // 位于继承关系根节点的类，通常都需要一个虚析构函数
     virtual ~Quote() = default;
+
+    // 该虚函数返回当前对象的一个动态分配的拷贝
+    virtual Quote* clone() const & {
+        return new Quote(*this);
+    }
+    virtual Quote* clone() && {
+        return new Quote(std::move(*this));
+    }
+
 private:
     std::string bookNo;
 protected:

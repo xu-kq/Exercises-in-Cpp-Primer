@@ -2,12 +2,20 @@
 
 class Bulk_quote : public Disc_quote {
 public:
-    Bulk_quote() = default;
+    // Bulk_quote() = default;
     Bulk_quote(const std::string& book, double price, std::size_t qty, double disc) :
                 Disc_quote(book, price, qty, disc) { }
 
     // derivate class must re-declarate all the virtual function 
     double net_price(std::size_t) const override;
+
+    // 虚拷贝
+    Bulk_quote* clone() const & override{
+        return new Bulk_quote(*this);
+    }
+    Bulk_quote* clone() && override{
+        return new Bulk_quote(std::move(*this));
+    }
 private:
     std::size_t min_qty = 0;
     double discount = 0.0;

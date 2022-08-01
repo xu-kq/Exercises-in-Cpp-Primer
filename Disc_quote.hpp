@@ -4,7 +4,7 @@
 // abastract base class
 class Disc_quote : public Quote{
 public:
-    Disc_quote() = default;
+    // Disc_quote() = default;
     Disc_quote(const std::string &book, double price,
             std::size_t qty, double disc) :
                 Quote(book, price), quantity(qty), discount(disc) { }
